@@ -2,8 +2,6 @@ import os
 import re
 import logging
 import sys
-import tkinter as tk
-from tkinter import filedialog, messagebox
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 logger = logging.getLogger(__name__)
@@ -63,7 +61,6 @@ def _get_files_from_directory(directory, recursive=False):
             if os.path.isfile(full_path) and _is_sv_or_v_file(filename):
                 files.append(full_path)
     return files
-
 
 def fv_files_creation(storage, output_dir):
     """
@@ -391,8 +388,10 @@ def tcl_creation(storage, output_dir):
         logger.exception("No se pudo crear el archivo TCL")
         return 1
 
-def main():
-    # Create main window
+def window_main():
+    import tkinter as tk
+    from tkinter import filedialog, messagebox
+
     root = tk.Tk()
     root.title("AutoJasper-FPV File Generator")
     root.geometry("500x450")
@@ -481,11 +480,11 @@ def main():
         except Exception as e:
             messagebox.showerror("Error", f"An error occurred: {str(e)}")
     
-    # Title
+
     title_label = tk.Label(root, text="AutoJasper-FPV File Generator", font=("Arial", 14, "bold"))
     title_label.pack(pady=10)
     
-    # File selection frame
+
     frame1 = tk.LabelFrame(root, text="Load RTL Files", padx=10, pady=10)
     frame1.pack(padx=10, pady=5, fill="x")
     
@@ -495,7 +494,6 @@ def main():
     file_label = tk.Label(frame1, text="No files loaded", fg="gray", wraplength=400)
     file_label.pack(pady=5)
     
-    # Output directory frame
     frame2 = tk.LabelFrame(root, text="Select Output Directory", padx=10, pady=10)
     frame2.pack(padx=10, pady=5, fill="x")
     
@@ -504,7 +502,6 @@ def main():
     output_label = tk.Label(frame2, text="No output directory selected", fg="gray", wraplength=400)
     output_label.pack(pady=5)
     
-    # Generate button
     frame3 = tk.Frame(root)
     frame3.pack(padx=10, pady=15, fill="x")
     
@@ -513,5 +510,103 @@ def main():
     
     root.mainloop()
 
+def cli_main():
+    """
+    Command-line interface for AutoJasper-FPV File Generator.
+    Provides interactive prompts for file selection, output directory, and generation.
+    """
+    storage = {}
+    if args.file:
+        if _is_sv_or_v_file(args.file):
+            storage[args.file] = _read_file_content(args.file)
+            logger.info(f"Loaded file: {args.file}")
+        else:
+            logger.error("Invalid file type. Please select .sv or .v file.")
+            return 1
+    elif args.directory:
+        files = _get_files_from_directory(args.directory, recursive=args.recursive)
+        if files:
+            for file in files:
+                storage[file] = _read_file_content(file)
+            logger.info(f"Loaded {len(files)} file(s) from {args.directory}")
+        else:
+            logger.error("No .sv or .v files found.")
+            return 1
+    else:
+        parser.print_help()
+        return 1
+    
+    if not os.path.exists(args.output):
+        os.makedirs(args.output)
+    
+    logger.info(f"Output directory: {args.output}\n")
+    
+    ret_fv = fv_files_creation(storage, args.output)
+    ret_macros = macros_creation(args.output)
+    ret_makefile = makefile_creation(list(storage.keys()), args.output)
+    ret_flist = flist_creation(list(storage.keys()), args.output)
+    ret_tcl = tcl_creation(storage, args.output)
+    
+    results = [
+        ("FV files", ret_fv),
+        ("Property defines", ret_macros),
+        ("Makefile", ret_makefile),
+        ("File list", ret_flist),
+        ("TCL script", ret_tcl)
+    ]
+    
+    logger.info("\n" + "="*50)
+    logger.info("Generation Summary:")
+    logger.info("="*50)
+    all_success = True
+    for task, ret in results:
+        status = "✓ Success" if ret == 0 else "✗ Failed"
+        logger.info(f"{task}: {status}")
+        if ret != 0:
+            all_success = False
+    
+    return 0 if all_success else 1
+
+
 if __name__ == "__main__":
-    sys.exit(main())
+    import argparse
+    parser = argparse.ArgumentParser(
+        description="AutoJasper-FPV File Generator - Generate formal verification framework"
+    )
+    parser.add_argument(
+        "-f", "--file",
+        type=str,
+        help="Path to a single RTL file (.sv or .v)"
+    )
+    parser.add_argument(
+        "-d", "--directory",
+        type=str,
+        help="Path to directory containing RTL files"
+    )
+    parser.add_argument(
+        "-o", "--output",
+        type=str,
+        required=True,
+        help="Output directory for generated files"
+    )
+    parser.add_argument(
+        "-r", "--recursive",
+        action="store_true",
+        help="Recursively search subdirectories"
+    )
+    
+    args = parser.parse_args()
+
+    if args.file or args.directory:
+        try:
+            return_code = cli_main()
+        except Exception as e:
+            logger.exception(f"An error occurred: {str(e)}")
+            return_code = 1
+    else:
+        try:
+            return_code = window_main()
+        except Exception as e:
+            logger.exception(f"An error occurred in window mode: {str(e)}")
+            return_code = 1
+    sys.exit(return_code)
