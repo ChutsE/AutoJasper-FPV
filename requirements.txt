@@ -1,0 +1,3 @@
+# AutoJasper-FPV uses only Python standard library modules:
+# os, re, sys, logging, argparse, tkinter
+# No third-party pip dependencies required.

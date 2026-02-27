@@ -510,7 +510,7 @@ def window_main():
     
     root.mainloop()
 
-def cli_main():
+def cli_main(args):
     """
     Command-line interface for AutoJasper-FPV File Generator.
     Provides interactive prompts for file selection, output directory, and generation.
@@ -576,30 +576,33 @@ if __name__ == "__main__":
     parser.add_argument(
         "-f", "--file",
         type=str,
+        default=None,
         help="Path to a single RTL file (.sv or .v)"
     )
     parser.add_argument(
         "-d", "--directory",
         type=str,
+        default=None,
         help="Path to directory containing RTL files"
     )
     parser.add_argument(
         "-o", "--output",
         type=str,
-        required=True,
+        default=None,
         help="Output directory for generated files"
     )
     parser.add_argument(
         "-r", "--recursive",
+        default=False,
         action="store_true",
         help="Recursively search subdirectories"
     )
     
     args = parser.parse_args()
 
-    if args.file or args.directory:
+    if (args.file or args.directory) and args.output:
         try:
-            return_code = cli_main()
+            return_code = cli_main(args)
         except Exception as e:
             logger.exception(f"An error occurred: {str(e)}")
             return_code = 1

@@ -1,132 +1,223 @@
-📘 AutoJasper-FPV
-# AutoJasper-FPV
-
-AutoJasper-FPV is a template-driven generator that creates a standardized, reproducible formal verification environment for Cadence JasperGold directly from an RTL directory.
-
-The framework enforces structured separation between RTL and formal infrastructure, provides macro-based SVA conventions, and enables multi-level property reuse for scalable compositional verification.
+# AutoJasper-FPV  
+### An Automated Formal Verification Framework Generator for JasperGold  
+**Author:** Jesus Esparza-Soto  
 
 ---
 
-## 🎯 Motivation
+## Abstract
 
-Formal Property Verification (FPV) flows are often rebuilt manually for each RTL block, leading to:
-
-- Inconsistent project structures
-- Repeated infrastructure effort
-- Poor reproducibility
-- Difficulty scaling across integration levels
-
-AutoJasper-FPV addresses this by automatically generating a structured, deterministic verification skeleton that allows engineers to focus on property specification instead of environment setup.
+AutoJasper-FPV is a lightweight and automated framework generator designed to accelerate the setup of Formal Property Verification (FPV) environments for hardware designs written in Verilog/SystemVerilog. The tool parses RTL source files and automatically produces a reusable verification scaffold compatible with Cadence JasperGold. It supports both graphical (GUI) and command-line (CLI) execution modes, enabling seamless integration in local development environments and remote Linux servers. The framework emphasizes property reuse, modular verification, and standardized macro-based assertion management.
 
 ---
 
-## 🏗️ Generated Project Structure
+## I. Introduction
 
-The generator emits a standardized hierarchy:
+Formal verification has become a critical methodology for ensuring correctness in modern digital hardware systems. However, the initial setup of a formal verification environment—especially for modular or hierarchical designs—often requires repetitive boilerplate configuration, including:
 
+- Formal wrapper modules  
+- Property macro definitions  
+- File lists (flists)  
+- TCL scripts for tool configuration  
+- Makefile targets for automation  
 
-project/
-│
-├── Makefile
-├── jg_fpv.tcl
-├── analyze.flist
-│
-├── rtl/
-│ └── rtl_files.flist
-│
-├── fv/
-│ ├── fv_files.flist
-│ ├── property_defines.svh
-│ └── skeleton_properties.sv
-│
-└── README.md
-
-
-### Execution Flow
-
-1. **Makefile** selects the verification target.
-2. **jg_fpv.tcl** configures JasperGold (clock/reset, engines, top module).
-3. **analyze.flist** orchestrates compilation.
-4. `rtl_files.v` enumerates synthesizable RTL sources.
-5. `fv_files.sv` enumerates formal infrastructure.
-6. `property_defines.svh` standardizes assert/assume/cover and intent reuse.
+AutoJasper-FPV addresses this gap by automatically generating a structured FPV environment from RTL inputs, reducing setup time while promoting consistency and reuse.
 
 ---
 
-## 🔬 Key Features
+## II. System Overview
 
-### ✅ Deterministic Infrastructure
-Single compilation root (`analyze.flist`) ensures reproducibility.
+AutoJasper-FPV operates in two modes:
 
-### ✅ RTL / FV Separation
-Formal logic is attached via `bind`, preserving RTL purity.
+### 1. Command-Line Interface (CLI)
 
-### ✅ Macro-Based SVA Conventions
-Standardized:
-- `assert`
-- `assume`
-- `cover`
+Recommended for:
 
-### ✅ Multi-Level Property Reuse
-The same intent can act as:
-- Assertion at block-level
-- Assumption at top-level
+- Linux servers  
+- SSH sessions  
+- Continuous Integration (CI)  
+- Automated formal flows  
 
-This enables scalable compositional verification.
+### 2. Graphical User Interface (GUI)
+
+Recommended for:
+
+- Local development  
+- Rapid prototyping  
+- Interactive use  
+
+The execution mode is determined automatically:
+
+IF (file OR directory provided) AND output provided → CLI mode  
+ELSE → GUI mode  
+
+This dual-mode design enables both automation and usability without maintaining separate tool versions.
 
 ---
 
-## 🚀 Quick Start
+## III. Generated Verification Infrastructure
 
-### 1. Clone the repository
+Given one or multiple RTL files (`.sv` or `.v`), the tool generates the following artifacts:
 
-bash
-git clone https://github.com/<org>/AutoJasper-FPV.git
-cd AutoJasper-FPV
-2. Generate a formal environment
-./generate_fpv.sh <rtl_directory>
+### A. Formal Wrapper Modules
 
-3. Run JasperGold
-make <target>
-🧪 Example
+For each RTL module, the tool creates:
 
-The repository includes minimal academic RTL examples demonstrating:
+`fv_<module>.sv`
 
-Block-level verification
+Each wrapper includes:
 
-Top-level integration
+- Port mirroring  
+- Parameter propagation  
+- Conditional `*_TOP` define handling  
+- ASM enable/disable configuration  
+- Bind statement instantiation  
 
-Property reuse patterns
+This enables block-level and top-level verification reuse.
 
-No proprietary RTL or tool binaries are distributed.
+---
 
-📖 Academic Context
+### B. Property Macro Definitions
 
-AutoJasper-FPV was developed as part of research on scalable formal verification methodologies and compositional reasoning in industrial FPV flows.
+File generated:
 
-If you use this framework in academic work, please cite:
+`property_defines.svh`
 
-AutoJasper-FPV: Template-Driven Formal Verification Framework Generator.
+This file defines reusable SystemVerilog macros:
 
-(Full citation information available upon publication.)
+- AST — Assertion property  
+- ASM — Assumption property  
+- COV — Coverage property  
+- REUSE — Context-aware property reuse  
 
-📜 License
+The REUSE macro enables compositional verification by switching between assumption and assertion semantics depending on whether verification is performed at block-level or top-level.
 
-This project is released under the MIT License.
+---
 
-You are free to use, modify, and distribute this software, provided that the original copyright notice is retained.
+### C. Makefile
 
-🤝 Contributing
+A Makefile is automatically generated with one target per RTL module:
 
-Contributions are welcome. Please:
+    <module>_top:
+        jg jg_fpv.tcl -allow_unsupported_OS -define <MODULE>_TOP 1&
 
-Follow the existing directory structure
+This enables direct invocation using:
 
-Preserve separation between RTL and formal infrastructure
+    make <module>_top
 
-Maintain macro-based SVA conventions
+---
 
-⚠️ Disclaimer
+### D. File List (analyze.flist)
 
-AutoJasper-FPV does not include Cadence JasperGold binaries.
-Users must provide their own licensed installation.
+The generated flist includes:
+
+- Include directories (`+incdir+.`)  
+- Macro definitions  
+- RTL design files  
+- Generated formal wrappers  
+
+This file is consumed during JasperGold analysis.
+
+---
+
+### E. TCL Script (jg_fpv.tcl)
+
+The generated TCL script defines:
+
+- SystemVerilog analysis options (`-sv12`)  
+- Dynamic top-module selection using `*_TOP` defines  
+- Elaboration constraints  
+- Clock and reset specification  
+- Proof invocation using `prove -all`  
+
+This provides a ready-to-run JasperGold verification flow.
+
+---
+
+## IV. Installation
+
+### Requirements
+
+- Python ≥ 3.9  
+- No third-party dependencies  
+- Tkinter (GUI mode only)  
+
+### Install Requirements
+
+    pip install -r requirements.txt
+
+The project relies exclusively on Python Standard Library modules.
+
+---
+
+## V. Execution
+
+### A. CLI Mode
+
+Single RTL file:
+
+    python autojasper_fpv.py -f ./rtl/design.sv -o ./out
+
+Directory:
+
+    python autojasper_fpv.py -d ./rtl -o ./out
+
+Recursive directory search:
+
+    python autojasper_fpv.py -d ./rtl -o ./out -r
+
+CLI mode activates only when a file or directory AND an output directory are specified.
+
+---
+
+### B. GUI Mode
+
+Run without CLI arguments:
+
+    python autojasper_fpv.py
+
+Workflow:
+
+1. Load RTL file or directory  
+2. Select output directory  
+3. Generate FPV framework  
+
+---
+
+## VI. Linux Considerations
+
+Tkinter is required for GUI mode.
+
+Ubuntu/Debian:
+
+    sudo apt install python3-tk
+
+If operating on a remote server without graphical support, CLI mode is recommended.
+
+---
+
+## VII. Design Assumptions and Limitations
+
+- RTL parsing is heuristic and regex-based.  
+- Complex SystemVerilog constructs (interfaces, modports, advanced generate blocks) may require manual refinement.  
+- Assumes standard signals `clk` and `arst_n`.  
+- Intended as a scaffold generator, not a full SystemVerilog parser.  
+
+---
+
+## VIII. Intended Applications
+
+- Academic research in formal verification  
+- JasperGold automation flows  
+- Rapid FPV environment setup  
+- Property reuse experimentation  
+- Teaching compositional verification methodologies  
+
+---
+
+## License
+
+MIT License  
+
+---
+
+AutoJasper-FPV enables scalable, reusable, and automated formal verification setup for JasperGold-based workflows.
