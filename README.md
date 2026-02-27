@@ -181,42 +181,9 @@ Workflow:
 2. Select output directory  
 3. Generate FPV framework  
 
----
+<img width="498" height="479" alt="image" src="https://github.com/user-attachments/assets/16801a13-fdc5-4cac-8677-440b921274c5" />
 
-## VI. Linux Considerations
 
-Tkinter is required for GUI mode.
-
-Ubuntu/Debian:
-
-    sudo apt install python3-tk
-
-If operating on a remote server without graphical support, CLI mode is recommended.
-
----
-
-## VII. Design Assumptions and Limitations
-
-- RTL parsing is heuristic and regex-based.  
-- Complex SystemVerilog constructs (interfaces, modports, advanced generate blocks) may require manual refinement.  
-- Assumes standard signals `clk` and `arst_n`.  
-- Intended as a scaffold generator, not a full SystemVerilog parser.  
-
----
-
-## VIII. Intended Applications
-
-- Academic research in formal verification  
-- JasperGold automation flows  
-- Rapid FPV environment setup  
-- Property reuse experimentation  
-- Teaching compositional verification methodologies  
-
----
-
-## License
-
-MIT License  
 
 ---
 
