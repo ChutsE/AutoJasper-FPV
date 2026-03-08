@@ -42,10 +42,4 @@ The main contributions of this work are:
 - **No third-party dependencies** — relies exclusively on Python Standard Library modules
 - **Tkinter** (GUI mode only)
 
-### Installation
 
-Install dependencies using:
-
-```bash
-pip install -r requirements.txt
-```
