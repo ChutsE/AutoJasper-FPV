@@ -1,0 +1,8 @@
+site_name: AutoJasper-FPV
+nav:
+  - Home: index.md
+  - Installation: Installation.md
+  - System Overview: Overview.md
+  - Verification Infrastructure: Verification.md
+theme:
+  name: readthedocs
