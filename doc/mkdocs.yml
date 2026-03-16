@@ -1,8 +1,16 @@
 site_name: AutoJasper-FPV
+
 nav:
   - Home: index.md
   - Installation: Installation.md
   - System Overview: Overview.md
+  - Quick Start: QuickStart.md
+  - Architecture: Architecture.md
   - Verification Infrastructure: Verification.md
+  - Property Macros: PropertyMacros.md
+  - Examples: Examples.md
+  - FAQ: FAQ.md
+  - Contributing: Contributing.md
+
 theme:
   name: readthedocs
