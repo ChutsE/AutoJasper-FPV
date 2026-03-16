@@ -1,14 +1,8 @@
+
 # Examples
 
-This section demonstrates how AutoJasper-FPV works with real designs.
+Example RTL:
 
----
-
-## Example 1 — Adder
-
-RTL:
-
-```
 module adder(
  input logic [7:0] a,
  input logic [7:0] b,
@@ -18,20 +12,7 @@ module adder(
 assign sum = a + b;
 
 endmodule
-```
 
----
+Run verification:
 
-## Generated Wrapper
-
-```
-fv_adder.sv
-```
-
----
-
-## Run Verification
-
-```
 make adder_top
-```

@@ -1,6 +1,7 @@
+
 # Property Macros
 
-AutoJasper-FPV defines a set of standardized macros for writing SystemVerilog Assertions.
+AutoFV defines standardized macros for SystemVerilog Assertions to simplify property authoring.
 
 ---
 
@@ -11,40 +12,15 @@ AutoJasper-FPV defines a set of standardized macros for writing SystemVerilog As
 AST | Assertion property |
 ASM | Assumption property |
 COV | Coverage property |
-REUSE | Context-aware property reuse |
+ROLE | Context‑dependent property role |
 
 ---
 
-## AST — Assertion
+## ROLE — Context‑Dependent Property Role
 
-```
-`AST(output_valid)
-```
+The `ROLE` macro enables **intent‑preserving property reuse across hierarchical verification levels**.
 
-Ensures a property must always hold during verification.
+- **Block‑level verification** → property behaves as an **assumption**
+- **Top‑level verification** → property becomes an **assertion**
 
----
-
-## ASM — Assumption
-
-```
-`ASM(input_valid)
-```
-
-Constrains input behavior.
-
----
-
-## COV — Coverage
-
-```
-`COV(reset_event)
-```
-
-Tracks verification coverage.
-
----
-
-## REUSE — Context-Aware Property
-
-The REUSE macro enables the same property to be used in different verification contexts.
+This supports **assume‑guarantee reasoning** and avoids property duplication.

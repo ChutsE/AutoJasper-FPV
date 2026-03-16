@@ -1,13 +1,14 @@
+
 # FAQ
 
-## Does AutoJasper-FPV require JasperGold?
+## Does AutoFV require JasperGold?
 
-No. JasperGold is only required to run the verification.
+No. The framework itself is tool‑agnostic. A formal verification engine is only required when running the verification flow.
 
 ## Does the tool modify RTL?
 
-No. Verification logic is inserted using SystemVerilog bind.
+No. Verification logic is inserted using SystemVerilog `bind` constructs.
 
-## Can it work with large SoC designs?
+## Can it scale to large SoC designs?
 
-Yes. The framework supports hierarchical verification.
+Yes. The framework supports hierarchical and compositional verification.

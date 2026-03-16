@@ -1,48 +1,17 @@
+
 # Quick Start
 
-This guide demonstrates how to generate a formal verification framework in less than one minute.
-
----
-
-## Step 1 — Prepare RTL
-
-Example RTL directory:
+1. Prepare RTL files
 
 rtl/
  ├── adder.sv
  ├── multiplier.sv
- └── alu.sv
 
----
+2. Run AutoFV
 
-## Step 2 — Run AutoJasper-FPV
+python autofv.py -d ./rtl -o ./formal
 
-```
-python autojasper_fpv.py -d ./rtl -o ./formal
-```
+3. Run verification
 
----
-
-## Step 3 — Generated Files
-
-formal/
- ├── fv_adder.sv
- ├── fv_multiplier.sv
- ├── analyze.flist
- ├── jg_fpv.tcl
- └── Makefile
-
----
-
-## Step 4 — Run JasperGold
-
-```
 cd formal
 make adder_top
-```
-
----
-
-## Step 5 — Verify Results
-
-JasperGold will analyze the design and prove the generated properties.
