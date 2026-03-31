@@ -20,7 +20,7 @@ AutoFV is designed to help **new hardware engineers and researchers quickly adop
 - Standardized **SystemVerilog Assertion (SVA) macro conventions**
 - Dual execution modes:
   - GUI (interactive)
-  - CLI (automation / CI)
+  - CLI (automation)
 
 ---
 
@@ -40,11 +40,21 @@ AutoFV Generator eliminates this repetitive setup by automatically generating a 
 
 ## Quick Start
 
-Generate a framework:
+### Generate a framework
 
+```bash
 python autofv.py -d ./rtl -o ./formal
+```
 
-Run formal verification:
+**Command-line arguments:**
+- `-d, --directory`: Specifies the path to RTL source files. Accepts either a directory containing multiple RTL files or a single RTL file path for targeted verification.
+- `-o, --output`: Specifies the output directory where the generated FPV framework and all supporting files will be created.
 
+### Run formal verification
+
+```bash
 cd formal
 make <module>_top
+```
+
+Navigate to the generated framework directory and execute the Makefile to start formal verification on the target module, replacing `<module>_top` with your desired module name.

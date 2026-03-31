@@ -1,14 +1,10 @@
-site_name: AutoJasper-FPV
+site_name: AutoFV_Framework
 
 nav:
   - Home: index.md
-  - Installation: Installation.md
-  - System Overview: Overview.md
-  - Quick Start: QuickStart.md
-  - Architecture: Architecture.md
-  - Verification Infrastructure: Verification.md
+  - Generate a Framework: GenerateFramework.md
+  - Run Formal: RunFormal.md
   - Property Macros: PropertyMacros.md
-  - Examples: Examples.md
   - FAQ: FAQ.md
   - Contributing: Contributing.md
 
