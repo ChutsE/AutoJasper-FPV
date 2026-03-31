@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Examples - AutoJasper-FPV</title>
+    <title>Generate a Framework - AutoJasper-FPV</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Examples";
-        var mkdocs_page_input_path = "Examples.md";
+        var mkdocs_page_name = "Generate a Framework";
+        var mkdocs_page_input_path = "GenerateFramework.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -43,18 +43,34 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Generate a Framework</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cli-execution">CLI Execution</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-from-a-single-rtl-file">Generate from a single RTL file</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-from-an-rtl-directory">Generate from an RTL directory</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#generate-recursively-from-subdirectories">Generate recursively from subdirectories</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cli-arguments">CLI arguments</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#gui-execution">GUI Execution</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Installation/">Installation</a>
+                <li class="toctree-l1"><a class="reference internal" href="../RunFormal/">Run Formal</a>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../PropertyMacros/">Property Macros</a>
-                </li>
-              </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Examples</a>
-    <ul class="current">
-    </ul>
                 </li>
               </ul>
               <ul>
@@ -79,7 +95,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Examples</li>
+      <li class="breadcrumb-item active">Generate a Framework</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -88,23 +104,45 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="examples">Examples</h1>
-<p>Example RTL:</p>
-<p>module adder(
- input logic [7:0] a,
- input logic [7:0] b,
- output logic [8:0] sum
-);</p>
-<p>assign sum = a + b;</p>
-<p>endmodule</p>
-<p>Run verification:</p>
-<p>make adder_top</p>
+                <h1 id="generate-a-framework">Generate a Framework</h1>
+<p>This page explains how to generate the FPV framework using both command-line and GUI modes.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>Python 3.9 or newer</li>
+<li>AutoFV dependencies:</li>
+</ul>
+<pre><code class="language-bash">pip install -r requirements.txt
+</code></pre>
+<p>For GUI mode, make sure <code>tkinter</code> is available in your Python installation.</p>
+<h2 id="cli-execution">CLI Execution</h2>
+<p>Use CLI mode when you want automation or script-based execution.</p>
+<h3 id="generate-from-a-single-rtl-file">Generate from a single RTL file</h3>
+<pre><code class="language-bash">python autofv.py -f ./rtl/design.sv -o ./out
+</code></pre>
+<h3 id="generate-from-an-rtl-directory">Generate from an RTL directory</h3>
+<pre><code class="language-bash">python autofv.py -d ./rtl -o ./out
+</code></pre>
+<h3 id="generate-recursively-from-subdirectories">Generate recursively from subdirectories</h3>
+<pre><code class="language-bash">python autofv.py -d ./rtl -o ./out -r
+</code></pre>
+<h3 id="cli-arguments">CLI arguments</h3>
+<ul>
+<li><code>-f, --file</code>: Path to one RTL file (<code>.sv</code> or <code>.v</code>)</li>
+<li><code>-d, --directory</code>: Path to a directory with RTL files</li>
+<li><code>-o, --output</code>: Output directory where the framework is generated</li>
+<li><code>-r, --recursive</code>: Search RTL files recursively in subdirectories (beta)</li>
+</ul>
+<h2 id="gui-execution">GUI Execution</h2>
+<p>GUI mode starts when you run the tool without CLI arguments.</p>
+<pre><code class="language-bash">python autofv.py
+</code></pre>
+<p>If the GUI does not start, verify that <code>tkinter</code> is installed and available in your active Python environment.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../PropertyMacros/" class="btn btn-neutral float-left" title="Property Macros"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../FAQ/" class="btn btn-neutral float-right" title="FAQ">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../RunFormal/" class="btn btn-neutral float-right" title="Run Formal">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -127,10 +165,10 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../PropertyMacros/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../FAQ/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../RunFormal/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

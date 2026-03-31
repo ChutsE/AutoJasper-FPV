@@ -5,15 +5,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Installation - AutoJasper-FPV</title>
+    <title>Run Formal - AutoJasper-FPV</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Installation";
-        var mkdocs_page_input_path = "Installation.md";
+        var mkdocs_page_name = "Run Formal";
+        var mkdocs_page_input_path = "RunFormal.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -43,18 +43,24 @@
                 <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
                 </li>
               </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../GenerateFramework/">Generate a Framework</a>
+                </li>
+              </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="#">Installation</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Run Formal</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#recommended-working-directory">Recommended working directory</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#run-makefile-commands">Run Makefile commands</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#example">Example</a>
+    </li>
     </ul>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../PropertyMacros/">Property Macros</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Examples/">Examples</a>
                 </li>
               </ul>
               <ul>
@@ -79,7 +85,7 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
-      <li class="breadcrumb-item active">Installation</li>
+      <li class="breadcrumb-item active">Run Formal</li>
     <li class="wy-breadcrumbs-aside">
     </li>
   </ul>
@@ -88,16 +94,30 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h1 id="installation">Installation</h1>
-<p>Requirements:</p>
-<p>Python 3.9+</p>
-<p>Run:</p>
-<p>python autofv.py</p>
+                <h1 id="run-formal">Run Formal</h1>
+<p>After generating the framework, run formal verification from the generated output folder.</p>
+<h2 id="recommended-working-directory">Recommended working directory</h2>
+<p>Move into the generated framework directory before running Makefile targets.</p>
+<pre><code class="language-bash">cd ./out
+</code></pre>
+<p>If you used another output path, replace <code>./out</code> with your selected output directory.</p>
+<h2 id="run-makefile-commands">Run Makefile commands</h2>
+<p>The generated Makefile creates one target per module using this format:</p>
+<pre><code class="language-text">&lt;module&gt;_top
+</code></pre>
+<p>Run formal for a specific module with:</p>
+<pre><code class="language-bash">make &lt;module&gt;_top
+</code></pre>
+<h2 id="example">Example</h2>
+<p>If your module is <code>alu</code>, run:</p>
+<pre><code class="language-bash">make alu_top
+</code></pre>
+<p>This command launches the formal flow configured in the generated framework.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href=".." class="btn btn-neutral float-left" title="Home"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../GenerateFramework/" class="btn btn-neutral float-left" title="Generate a Framework"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../PropertyMacros/" class="btn btn-neutral float-right" title="Property Macros">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -121,7 +141,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href=".." style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../GenerateFramework/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../PropertyMacros/" style="color: #fcfcfc">Next &raquo;</a></span>
