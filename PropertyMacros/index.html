@@ -60,6 +60,18 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#reuse-contextdependent-property-role">REUSE — Context‑Dependent Property Role</a>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#usage-examples">Usage Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ast-example">AST Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#asm-example">ASM Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#cov-example">COV Example</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#reuse-example">REUSE Example</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                 </li>
               </ul>
@@ -171,6 +183,20 @@
 <li><strong>Block‑level verification</strong> (<code>top=1'b0</code>) → property becomes an <strong>assertion</strong></li>
 </ul>
 <p>This supports <strong>assume‑guarantee reasoning</strong> and avoids property duplication.</p>
+<hr />
+<h2 id="usage-examples">Usage Examples</h2>
+<h3 id="ast-example">AST Example</h3>
+<pre><code class="language-systemverilog">`AST(rca, valid_output, (req == 1'b1), (ack == 1'b1))
+</code></pre>
+<h3 id="asm-example">ASM Example</h3>
+<pre><code class="language-systemverilog">`ASM(rca, input_stable, (clk == 1'b1), (data_in == $past(data_in)))
+</code></pre>
+<h3 id="cov-example">COV Example</h3>
+<pre><code class="language-systemverilog">`COV(rca, reset_triggered, (arst_n == 1'b0), (state == IDLE))
+</code></pre>
+<h3 id="reuse-example">REUSE Example</h3>
+<pre><code class="language-systemverilog">`REUSE(1'b0, rca, handshake, (req == 1'b1), (ack == 1'b1))
+</code></pre>
               
             </div>
           </div><footer>
