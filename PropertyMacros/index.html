@@ -47,26 +47,16 @@
                 <li class="toctree-l1"><a class="reference internal" href="../Installation/">Installation</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Overview/">System Overview</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../QuickStart/">Quick Start</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Architecture/">Architecture</a>
-                </li>
-              </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../Verification/">Verification Infrastructure</a>
-                </li>
-              </ul>
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="#">Property Macros</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#available-macros">Available Macros</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#ast-assertion-property">AST — Assertion Property</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#asm-assumption-property">ASM — Assumption Property</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#cov-coverage-property">COV — Coverage Property</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#role-contextdependent-property-role">ROLE — Context‑Dependent Property Role</a>
     </li>
@@ -139,6 +129,33 @@
 </tbody>
 </table>
 <hr />
+<h2 id="ast-assertion-property">AST — Assertion Property</h2>
+<p>The <code>AST</code> macro defines a property that must always hold true in the design.</p>
+<pre><code class="language-systemverilog">AST_name: assert property (@(posedge clk) condition);
+</code></pre>
+<ul>
+<li>Used for mandatory design requirements</li>
+<li>Violations indicate design failures</li>
+</ul>
+<hr />
+<h2 id="asm-assumption-property">ASM — Assumption Property</h2>
+<p>The <code>ASM</code> macro specifies assumptions about the environment or inputs.</p>
+<pre><code class="language-systemverilog">ASM_name: assume property (@(posedge clk) input_constraint);
+</code></pre>
+<ul>
+<li>Constrains the verification space</li>
+<li>Prevents unrealistic stimulus scenarios</li>
+</ul>
+<hr />
+<h2 id="cov-coverage-property">COV — Coverage Property</h2>
+<p>The <code>COV</code> macro tracks whether specific properties or scenarios occur during simulation.</p>
+<pre><code class="language-systemverilog">COV_name: cover property (@(posedge clk) scenario);
+</code></pre>
+<ul>
+<li>Measures verification completeness</li>
+<li>Identifies untested design behaviors</li>
+</ul>
+<hr />
 <h2 id="role-contextdependent-property-role">ROLE — Context‑Dependent Property Role</h2>
 <p>The <code>ROLE</code> macro enables <strong>intent‑preserving property reuse across hierarchical verification levels</strong>.</p>
 <ul>
@@ -150,7 +167,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../Verification/" class="btn btn-neutral float-left" title="Verification Infrastructure"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Installation/" class="btn btn-neutral float-left" title="Installation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../Examples/" class="btn btn-neutral float-right" title="Examples">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -174,7 +191,7 @@
   <span class="rst-current-version" data-toggle="rst-current-version">
     
     
-      <span><a href="../Verification/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../Installation/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
       <span><a href="../Examples/" style="color: #fcfcfc">Next &raquo;</a></span>
