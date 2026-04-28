@@ -318,8 +318,6 @@ def flist_creation(rtl_files_paths, output_dir):
 
     """
     flist_lines = [
-        "+incdir+.",
-        "",
         "# Definitions for RTL configurations",
         "   # Add here your `define statements for RTL configurations",
         "",

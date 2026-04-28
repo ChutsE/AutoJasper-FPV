@@ -15,6 +15,8 @@ AutoFV is a lightweight automated framework generator designed to accelerate the
 
 Formal verification has become a critical methodology for ensuring correctness in modern digital hardware systems. Property checking using SystemVerilog Assertions (SVA) enables exhaustive exploration of reachable behaviors, complementing traditional simulation-based verification flows.
 
+For more information, visit the project page at [chutse.github.io/AutoFV-Framework/](https://chutse.github.io/AutoFV-Framework/).
+
 However, the initial setup of a formal verification environment—especially for modular or hierarchical designs—often requires repetitive boilerplate configuration, including:
 
 - Formal wrapper modules  
@@ -140,7 +142,6 @@ This enables rapid switching between verification targets.
 
 The generated file list includes:
 
-- Include directories (`+incdir+.`)  
 - Macro definitions  
 - RTL design files  
 - Generated formal verification modules  
@@ -194,20 +195,15 @@ The project relies only on Python Standard Library modules.
 Single RTL file:
 
 ```bash
-python autofv.py -f ./rtl/design.sv -o ./out
+python autofv.py -f ./rtl/design.sv -o ./formal
 ```
 
 Directory:
 
 ```bash
-python autofv.py -d ./rtl -o ./out
+python autofv.py -d ./rtl -o ./formal
 ```
 
-Recursive directory search:
-
-```bash
-python autofv.py -d ./rtl -o ./out -r
-```
 
 CLI mode activates when an RTL input and an output directory are provided.
 
