@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>Generated Files - AutoFV_Framework</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "Generated Files";
+        var mkdocs_page_input_path = "GeneratedFiles.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> AutoFV_Framework
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Home</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../GenerateFramework/">Generate a Framework</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Generated Files</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#file-overview">File Overview</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#per-module-files">Per-Module Files</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#shared-files">Shared Files</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#formal-verification-wrapper">Formal Verification Wrapper</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#property-macro-definitions">Property Macro Definitions</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#makefile">Makefile</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#file-list-analyzeflist">File List (analyze.flist)</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#tcl-script">TCL Script</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#log-file">Log File</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../RunFormal/">Run Formal</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../PropertyMacros/">Property Macros Usage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../SoftwareArchitecture/">Software Architecture</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../Contributing/">Contributing</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../FAQ/">FAQ</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">AutoFV_Framework</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Generated Files</li>
+    <li class="wy-breadcrumbs-aside">
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <h1 id="generated-files">Generated Files</h1>
+<p>When AutoFV generates a framework, it creates a set of files in the output directory. This page describes each file and shows examples.</p>
+<h2 id="file-overview">File Overview</h2>
+<p>The framework generates the following files for each RTL module and shared files for the verification environment.</p>
+<h5 id="per-module-files">Per-Module Files</h5>
+<p>For each RTL source file, AutoFV generates a formal verification wrapper module.</p>
+<p><strong>File naming</strong>: <code>fv_&lt;module_name&gt;.sv</code></p>
+<h5 id="shared-files">Shared Files</h5>
+<p>These files are created once and shared across all modules.</p>
+<ul>
+<li><code>property_defines.svh</code> — Macro definitions for assertions and assumptions</li>
+<li><code>Makefile</code> — Build targets for formal verification</li>
+<li><code>analyze.flist</code> — File list for compilation</li>
+<li><code>jg_fpv.tcl</code> — Formal verification script</li>
+</ul>
+<hr />
+<h2 id="formal-verification-wrapper">Formal Verification Wrapper</h2>
+<p><strong>Example file</strong>: <code>fv_alu.sv</code> (generated from <code>alu.v</code>)</p>
+<pre><code class="language-systemverilog">module fv_alu (
+input [7:0] A,
+input [7:0] B,
+input [2:0] op,
+output [7:0] result
+);
+  `ifdef ALU_TOP 
+    `define ALU_ASM 1
+  `else
+    `define ALU_ASM 0
+  `endif
+
+  // Here add yours AST, COV, ASM, REUSE etc.
+
+endmodule
+
+bind alu fv_alu fv_alu_i(.*);
+</code></pre>
+<p>The wrapper module:
+- Mirrors the ports of the original module
+- Includes a <code>bind</code> statement to attach to the design
+- Provides conditional defines for verification context</p>
+<hr />
+<h2 id="property-macro-definitions">Property Macro Definitions</h2>
+<p><strong>File</strong>: <code>property_defines.svh</code></p>
+<pre><code class="language-systemverilog">`define AST(block=rca, name=no_name, precond=1'b1 |-&gt;, consq=1'b0) \
+``block``_ast_``name``: assert property (@(posedge clk) disable iff(!arst_n) ``precond`` ``consq``);
+
+`define ASM(block=rca, name=no_name, precond=1'b1 |-&gt;, consq=1'b0) \
+``block``_ast_``name``: assume property (@(posedge clk) disable iff(!arst_n) ``precond`` ``consq``);
+
+`define COV(block=rca, name=no_name, precond=1'b1 |-&gt;, consq=1'b0) \
+``block``_ast_``name``: cover property (@(posedge clk) disable iff(!arst_n) ``precond`` ``consq``);
+
+`define ROLE(top=1'b0, block=no_name, name=no_name, precond=1'b1 |-&gt;, consq=1'b0) \
+  if(top==1'b1) begin \
+  ``block``_asm_``name``: assume property (@(posedge clk) disable iff(!arst_n) ``precond`` ``consq``); \
+  end else begin \
+  ``block``_ast_``name``: assert property (@(posedge clk) disable iff(!arst_n) ``precond`` ``consq``); \
+  end
+</code></pre>
+<p>These macros provide a standardized way to write verification properties across the framework.</p>
+<hr />
+<h2 id="makefile">Makefile</h2>
+<p><strong>File</strong>: <code>Makefile</code></p>
+<pre><code class="language-makefile">alu_top:
+    jg jg_fpv.tcl -allow_unsupported_OS -define ALU_TOP 1&amp;
+
+memory_top:
+    jg jg_fpv.tcl -allow_unsupported_OS -define MEMORY_TOP 1&amp;
+
+</code></pre>
+<p>Each target corresponds to one module. Run formal verification with:</p>
+<pre><code class="language-bash">make alu_top
+</code></pre>
+<hr />
+<h2 id="file-list-analyzeflist">File List (analyze.flist)</h2>
+<p><strong>File</strong>: <code>analyze.flist</code></p>
+<pre><code>+incdir+.
+
+# Definitions for RTL configurations
+   # Add here your `define statements for RTL configurations
+
+# Formal properies macros
+./property_defines.svh
+
+# RTL design files
+../rtl/alu.v
+../rtl/memory.v
+
+# Formal verification files
+./fv_alu.sv
+./fv_memory.sv
+</code></pre>
+<p>This file tells the formal tool which files to compile and analyze.</p>
+<hr />
+<h2 id="tcl-script">TCL Script</h2>
+<p><strong>File</strong>: <code>jg_fpv.tcl</code></p>
+<pre><code class="language-tcl">clear -all
+
+set_proofgrid_bridge off
+
+set fv_analyze_options { -sv12 }
+set design_top shifting_cell
+
+if {[info exists ALU_TOP]} {
+  lappend fv_analyze +define+ALU_TOP
+  set design_top alu
+}
+
+if {[info exists MEMORY_TOP]} {
+  lappend fv_analyze +define+MEMORY_TOP
+  set design_top memory
+}
+
+analyze [join $fv_analyze_options] -f analyze.flist
+
+elaborate -bbox_a 65535 -bbox_mul 65535 -non_constant_loop_limit 2000 -top $design_top
+get_design_info
+
+clock clk
+reset -expression !arst_n
+set_engineJ_max_trace_length 2000
+
+prove -all
+</code></pre>
+<p>This script configures and runs the formal verification engine.</p>
+<hr />
+<h2 id="log-file">Log File</h2>
+<p><strong>File</strong>: <code>autofv.log</code></p>
+<p>Created in the directory where the script is executed. Contains all generation and execution events.</p>
+<pre><code>INFO:autofv: Execution directory: /home/user/project
+INFO:autofv: Log file: /home/user/project/autofv.log
+INFO:autofv: Loaded file: ./rtl/alu.v
+INFO:autofv: Loaded 1 file(s) from ./rtl
+INFO:autofv: Output directory: ./formal
+
+INFO:autofv: 
+Archivo: ./rtl/alu.v
+INFO:autofv: module alu (
+INFO:autofv: FV file created: ./formal/fv_alu.sv
+INFO:autofv: Archivo property_defines.svh creado en: ./formal/property_defines.svh
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../GenerateFramework/" class="btn btn-neutral float-left" title="Generate a Framework"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../RunFormal/" class="btn btn-neutral float-right" title="Run Formal">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+    
+      <span><a href="../GenerateFramework/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../RunFormal/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        });
+    </script>
+
+</body>
+</html>

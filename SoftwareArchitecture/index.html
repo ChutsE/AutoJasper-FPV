@@ -48,11 +48,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../GeneratedFiles/">Generated Files</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../RunFormal/">Run Formal</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../PropertyMacros/">Property Macros</a>
+                <li class="toctree-l1"><a class="reference internal" href="../PropertyMacros/">Property Macros Usage</a>
                 </li>
               </ul>
               <ul class="current">
@@ -122,20 +126,20 @@
 </ul>
 <p>Both modes share the same generation pipeline and produce the same set of output files.</p>
 <h2 id="main-components">Main Components</h2>
-<h4 id="1-input-handling">1. Input handling</h4>
+<h5 id="1-input-handling">1. Input handling</h5>
 <p>The script accepts either a single RTL file or a directory of RTL files. It filters files with <code>.v</code> and <code>.sv</code> extensions and loads their contents into memory.</p>
-<h4 id="2-framework-generation">2. Framework generation</h4>
+<h5 id="2-framework-generation">2. Framework generation</h5>
 <p>For each RTL source, AutoFV generates formal verification wrapper modules. These wrappers are built from the original module structure and are prepared for binding into the design.</p>
-<h4 id="3-property-macros">3. Property macros</h4>
+<h5 id="3-property-macros">3. Property macros</h5>
 <p>The script creates a shared header file with SystemVerilog macros for assertions, assumptions, coverage, and role-based properties.</p>
-<h4 id="4-build-support-files">4. Build support files</h4>
+<h5 id="4-build-support-files">4. Build support files</h5>
 <p>AutoFV also generates supporting files for formal execution:</p>
 <ul>
 <li><code>Makefile</code></li>
 <li><code>analyze.flist</code></li>
 <li><code>jg_fpv.tcl</code></li>
 </ul>
-<h4 id="5-logging">5. Logging</h4>
+<h5 id="5-logging">5. Logging</h5>
 <p>The script writes log output to <code>autofv.log</code> and also prints the same messages in the terminal.</p>
 <h2 id="execution-flow">Execution Flow</h2>
 <ol>
@@ -158,7 +162,7 @@
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../PropertyMacros/" class="btn btn-neutral float-left" title="Property Macros"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../PropertyMacros/" class="btn btn-neutral float-left" title="Property Macros Usage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../Contributing/" class="btn btn-neutral float-right" title="Contributing">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 

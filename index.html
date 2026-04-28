@@ -64,11 +64,15 @@
                 </li>
               </ul>
               <ul>
+                <li class="toctree-l1"><a class="reference internal" href="GeneratedFiles/">Generated Files</a>
+                </li>
+              </ul>
+              <ul>
                 <li class="toctree-l1"><a class="reference internal" href="RunFormal/">Run Formal</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="PropertyMacros/">Property Macros</a>
+                <li class="toctree-l1"><a class="reference internal" href="PropertyMacros/">Property Macros Usage</a>
                 </li>
               </ul>
               <ul>
@@ -136,13 +140,13 @@
 <p>AutoFV Generator eliminates this repetitive setup by automatically generating a ready‑to‑use FPV framework directly from RTL sources.</p>
 <hr />
 <h2 id="quick-start">Quick Start</h2>
-<h4 id="generate-a-framework">Generate a framework</h4>
+<h5 id="generate-a-framework">Generate a framework</h5>
 <pre><code class="language-bash">python autofv.py -d ./rtl -o ./formal
 </code></pre>
 <p><strong>Command-line arguments:</strong>
 - <code>-d, --directory</code>: Specifies the path to RTL source files. Accepts either a directory containing multiple RTL files or a single RTL file path for targeted verification.
 - <code>-o, --output</code>: Specifies the output directory where the generated FPV framework and all supporting files will be created.</p>
-<h4 id="run-formal-verification">Run formal verification</h4>
+<h5 id="run-formal-verification">Run formal verification</h5>
 <pre><code class="language-bash">cd formal
 make &lt;module&gt;_top
 </code></pre>
@@ -195,5 +199,5 @@ make &lt;module&gt;_top
 
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-04-28 03:32:48.591305+00:00
+Build Date UTC : 2026-04-28 03:51:49.994540+00:00
 -->
