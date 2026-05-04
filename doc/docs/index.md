@@ -9,6 +9,8 @@ The tool analyzes RTL files and automatically produces a reusable verification i
 
 AutoFV is designed to help **new hardware engineers and researchers quickly adopt formal verification methodologies** without manually constructing the entire verification infrastructure.
 
+For the source code and project history, visit the [AutoFV-Framework repository](https://github.com/ChutsE/AutoFV-Framework).
+
 ---
 
 ## Key Features
